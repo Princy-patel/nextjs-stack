@@ -1,7 +1,7 @@
 import React from "react";
 
-function BlogsPage() {
-  return <div>BlogsPage</div>;
+function BlogsPage({ params }) {
+  return <h1>{params.slugs}</h1>;
 }
 
 export default BlogsPage;

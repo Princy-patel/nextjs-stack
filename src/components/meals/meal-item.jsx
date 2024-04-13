@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import classes from "./meal-item.module.css"
 
 function MealItem({ title, slug, image, summary, creator }) {
   return (
