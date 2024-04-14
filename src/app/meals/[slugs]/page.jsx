@@ -3,6 +3,21 @@ import classes from "./page.module.css";
 import Image from "next/image";
 import { getMeal } from "../../../../lib/meals";
 import { notFound } from "next/navigation";
+
+export async function generateMetadata({ params }) {
+  const meal = await getMeal(params.slugs);
+
+  if (!meal) {
+    // will show closest not-found page or error page available in the project
+    notFound();
+  }
+  
+  return {
+    title: meal.title,
+    description: meal.summary,
+  };
+}
+
 async function BlogsPage({ params }) {
   const meal = await getMeal(params.slugs);
 
