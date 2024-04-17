@@ -5,6 +5,13 @@ import React from "react";
 function ClientProjectsPage() {
   const router = useRouter();
 
+  const loadProjectHandler = function () {
+    // router.replace(`${router.query.id}/projects`);
+    router.push({
+      pathname: "/client/[id]/[clientprojectid]",
+      query: { id: "max", clientprojectid: "projectb" },
+    });
+  };
   return (
     <div>
       <h1>
@@ -13,6 +20,8 @@ function ClientProjectsPage() {
           {router.query.id}
         </code>
       </h1>
+
+      <button onClick={loadProjectHandler}>Load Project A</button>
     </div>
   );
 }
