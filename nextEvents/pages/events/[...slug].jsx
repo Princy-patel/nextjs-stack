@@ -5,6 +5,7 @@ import EventList from "../../components/events/event-list";
 import ResultsTitle from "../../components/events/results-title";
 import ErrorAlert from "../../components/ui/error-alert";
 import Button from "../../components/ui/button";
+import Head from "next/head";
 
 function FilteredEventPage() {
   const router = useRouter();
@@ -14,6 +15,13 @@ function FilteredEventPage() {
   if (!filteredData) {
     return <p className="center">Loading...</p>;
   }
+
+  let pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta name="description" content="List of Filtered Events" />
+    </Head>
+  );
 
   const filteredYear = filteredData[0];
   const filteredMonth = filteredData[1];
@@ -31,6 +39,7 @@ function FilteredEventPage() {
   ) {
     return (
       <>
+        {pageHeadData}
         <ErrorAlert>
           <p>Invalid filter. Please adjust your values!</p>
         </ErrorAlert>
@@ -42,6 +51,16 @@ function FilteredEventPage() {
     );
   }
 
+  pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta
+        name="description"
+        content={`All events for ${numYear}/${numMonth}`}
+      />
+    </Head>
+  );
+
   const filteredEvents = getFilteredEvents({
     year: numYear,
     month: numMonth,
@@ -50,6 +69,7 @@ function FilteredEventPage() {
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <>
+        {pageHeadData}
         <ErrorAlert>
           <p>No events found for chosen filter!</p>
         </ErrorAlert>
@@ -65,6 +85,7 @@ function FilteredEventPage() {
 
   return (
     <div>
+      {pageHeadData}
       <ResultsTitle date={newDate} />
       <EventList items={filteredEvents} />
     </div>
