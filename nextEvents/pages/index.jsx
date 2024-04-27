@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { getFeaturedEvents } from "../dummy-data";
 import EventList from "../components/events/event-list";
 import EventsSearch from "../components/events/event-search";
+import Head from "next/head";
 
 function HomePage() {
   const router = useRouter();
@@ -15,6 +16,13 @@ function HomePage() {
 
   return (
     <div>
+      <Head>
+        <title>Next Events</title>
+        <meta
+          name="description"
+          content="Find a lot of great events that allows you to evolve..."
+        />
+      </Head>
       <EventsSearch onSearch={featuredEvent} />
       <EventList items={featuredEvents} />
     </div>
